@@ -42,7 +42,8 @@ RUN apt-get -qq update -y && apt-get -qq install -y --no-install-recommends \
     iproute2 net-tools iputils-ping traceroute dnsutils tcpdump netcat-openbsd nmap openssh-client openssh-server sshfs cifs-utils nfs-common rsync curl wget \
     build-essential gcc g++ make autoconf automake pkg-config cmake git flex bison gdb valgrind clangd \
     texlive-xetex texlive-fonts-recommended texlive-plain-generic pandoc \ 
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
     
 # Install code-server (VS Code in browser)
 RUN curl -fsSL https://code-server.dev/install.sh | sh
