@@ -2,7 +2,7 @@
 
 Jupyter lab image with Ubuntu Linux unminimized. Also includes vs-code. Inherits from quay.io/jupyter/base-notebook:latest.
 
-## Additional Packages
+## Additional Packages - usage restricted due to limited permissions in the image.
 ### Shells & Core Command Utilities:
 - bash, findutils, grep, sed, gawk, diffutils, patch, less, nano
 - vim, emacs, aspell, file, landscape-sysinfo (alternative to sysinfo)
