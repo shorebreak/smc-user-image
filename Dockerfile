@@ -12,8 +12,11 @@ USER root
 
 # Prevent interactive prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
+
 ENV NB_USER=jovyan
-ENV NB_UID=1000
+ENV NB_UID=1000 \
+    NB_GID=${NB_UID}
+
 ENV SHELL=/bin/bash
 ENV SUDOERS_CUSTOM_FILE=/etc/sudoers.d/${NB_USER}_sudo
 ENV BASH_CUSTOM=/etc/bash.bashrc
@@ -77,8 +80,8 @@ ENV CONDA_AUTO_ACTIVATE_BASE=false
 USER root
 # Set up jovyan similar to existing image
 # Modify existing user/group or || create them if they do not exist
-RUN groupmod -g 1000 ${NB_USER} || groupadd -g 1000 ${NB_USER} \
-    && usermod -u 1000 -g ${NB_USER} ${NB_USER} || useradd -u 1000 -g ${NB_USER} -m -s /bin/bash ${NB_USER}
+RUN groupmod -g ${NB_GID} ${NB_USER} || groupadd -g ${NB_GID} ${NB_USER} \
+    && usermod -u ${NB_UID} -g ${NB_USER} ${NB_USER} || useradd -u ${NB_UID} -g ${NB_USER} -m -s /bin/bash ${NB_USER}
     
 # Allow NB_USER (joyvan) to run set of user/group workstation administration utilities and apt/apt-get, excluding /usr/bin/passwd 
 RUN echo "${NB_USER} ALL=(ALL:ALL) NOPASSWD: /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /usr/sbin/groupadd, /usr/sbin/groupdel, /usr/sbin/groupmod, /usr/bin/apt-get, /usr/bin/apt" \
